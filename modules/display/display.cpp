@@ -3,6 +3,7 @@
 #include "mbed.h"
 #include "arm_book_lib.h"
 #include "display.h"
+#include "pc_serial_com.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -222,6 +223,7 @@ void displayInit( displayType_t type, displayConnection_t connection )
 
 void displayCharPositionWrite( uint8_t charPositionX, uint8_t charPositionY )
 {    
+    char str[100];
     if( display.type == DISPLAY_TYPE_LCD_HD44780 ) {
         switch( charPositionY ) {
             case 0:
@@ -291,10 +293,15 @@ void displayCharPositionWrite( uint8_t charPositionX, uint8_t charPositionY )
             break;
          }
     }
+    sprintf ( str, "Fila: %03d, Columna: %03d \n",charPositionY,charPositionX );    //Imprime por consola la coluna y fila a la que va a escribir
+    pcSerialComStringWrite(str);
 }
 
 void displayStringWrite( const char * str )
 {
+    char strSerial[100];                             //Imprime por consola lo que va a mostrar el display
+    sprintf(strSerial,"%s \n",str);
+    pcSerialComStringWrite(strSerial);
     while (*str) {
         displayCodeWrite(DISPLAY_RS_DATA, *str++);
     }
