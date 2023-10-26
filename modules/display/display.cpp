@@ -173,17 +173,6 @@ se utilizan para la comunicación I2C con el módulo PCF8574.
     - platform/internal/mbed_os_timer.h 
     - "rtos/Kernel.h" y "rtos/ThisThread.h" (MBED_CONF_RTOS_PRESENT si está definida)
 
-- displayCodeWrite(bool type, uint8_t dataBus) en display.cpp
-  - Llama a:
-    - displayPinWrite(uint8_t pinName, int value)
-    - displayDataBusWrite(uint8_t dataBus)
-  - I2C.h
-
-- displayPinWrite(uint8_t pinName, int value) en display.cpp
-  - Llama a:
-    - write en I2C
-  - Dependencia:
-    - I2C
  
 - displayDataBusWrite(uint8_t dataBus) en display.cpp
   - Llama a:
